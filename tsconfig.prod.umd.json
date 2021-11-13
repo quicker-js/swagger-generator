@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "module": "System",
+    "target": "ES5",
+    "resolveJsonModule": false,
+    "outDir": "dist/umd"
+  },
+}
