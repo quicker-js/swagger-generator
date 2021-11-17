@@ -1,9 +1,12 @@
 {
   "name": "@quicker-js/swagger-generator",
-  "version": "0.0.1-dev.2021111701",
+  "version": "0.0.1-dev.2021111702",
   "description": "swagger-generator is used to convert a swagger api to a class instance. support url or json file.",
   "main": "dist/cjs",
   "types": "dist/types",
+  "bin": {
+    "swagger-generator": "./dist/cjs/bin/index.js"
+  },
   "scripts": {
     "build:clean": "rimraf dist && rimraf docs",
     "build:es2015": "tsc --project tsconfig.prod.esm2015.json",
