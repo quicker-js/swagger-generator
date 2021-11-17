@@ -20,4 +20,21 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+
+/**
+ * @class SwaggerApiTag
+ */
+export class SwaggerApiTag {
+  /**
+   * 名称
+   */
+  @Prop.default
+  public name: string;
+
+  /**
+   * 描述
+   */
+  @Prop.default
+  public description: string;
+}

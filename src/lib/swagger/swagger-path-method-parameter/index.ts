@@ -20,4 +20,59 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+import { SwaggerPathMethodSchema } from '../swagger-path-method-schema';
+
+/**
+ * @class SwaggerPathMethodParameter
+ */
+export class SwaggerPathMethodParameter {
+  @Prop.default
+  public name: string;
+
+  @Prop.default
+  public in: string;
+
+  @Prop.default
+  public description: string;
+
+  @Prop.default
+  public required: boolean;
+
+  @Prop.default
+  public type?: string;
+
+  @Prop.default
+  private format: string;
+
+  @Prop.default
+  private schema?: SwaggerPathMethodSchema;
+
+  /**
+   * 获取type
+   */
+  public getType(): string {
+    if (this.type) {
+      return this.type;
+    }
+
+    if (this.schema && this.schema.type) {
+      return this.schema.type;
+    }
+
+    return '';
+  }
+
+  /**
+   * 获取format
+   */
+  public getFormat(): string {
+    if (this.format) {
+      return this.format;
+    }
+    if (this.schema && this.schema.format) {
+      return this.schema.format;
+    }
+    return '';
+  }
+}

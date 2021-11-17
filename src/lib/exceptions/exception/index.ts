@@ -20,4 +20,9 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+/**
+ * @class Exception
+ */
+export abstract class Exception extends Error {
+  public abstract readonly name: string;
+}

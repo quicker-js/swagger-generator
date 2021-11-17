@@ -20,4 +20,18 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { FileManager } from '../file-manager';
+import { ParseHandler } from '../parse-handler';
+
+/**
+ * @class NamespaceManager
+ */
+export class NamespaceManager extends Map<string, FileManager> {
+  /**
+   * 构造函数
+   * @param handler
+   */
+  public constructor(public readonly handler: ParseHandler) {
+    super();
+  }
+}

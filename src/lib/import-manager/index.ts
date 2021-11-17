@@ -20,4 +20,40 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+/**
+ * @class ImportManager
+ */
+export class ImportManager extends Map<
+  string,
+  { default?: string; members: Set<string> }
+> {
+  /**
+   *
+   * @param key
+   * @param value
+   */
+  public set(
+    key: string,
+    value: { default?: string; members?: Set<string> }
+  ): this {
+    const newVar = this.get(key);
+    if (newVar) {
+      if (value.default) {
+        newVar.default = value.default;
+      }
+      if (newVar.members) {
+        if (value.members) {
+          value.members.forEach((o) => newVar.members.add(o));
+        }
+      } else if (value.members) {
+        newVar.members = value.members;
+      }
+    } else {
+      if (!value.members) {
+        value.members = new Set();
+      }
+      super.set(key, value as any);
+    }
+    return this;
+  }
+}

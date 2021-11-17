@@ -20,4 +20,7 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+export * from './config';
+export * from './moment-replacer';
+export * from './name-replacer';
+export * from './path-replacer';

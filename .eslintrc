@@ -1,6 +1,7 @@
 {
   "ignorePatterns": [
-    "dist"
+    "dist",
+    "*.js"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
@@ -54,6 +55,7 @@
     "no-lone-blocks": "error",
     "no-unused-vars": "off",
     "no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/typedef": "error",
     "@typescript-eslint/comma-spacing": "error",
     "@typescript-eslint/default-param-last": "error",

@@ -20,4 +20,21 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+
+/**
+ * @class SwaggerPathMethodSchema
+ */
+export class SwaggerPathMethodSchema {
+  /**
+   * 类型
+   */
+  @Prop.default
+  public type: string;
+
+  /**
+   * 格式
+   */
+  @Prop.default
+  public format: string;
+}

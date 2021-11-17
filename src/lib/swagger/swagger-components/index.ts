@@ -20,4 +20,15 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+import { SwaggerDefinition } from '../swagger-definition';
+
+/**
+ * @class SwaggerComponents
+ */
+export class SwaggerComponents {
+  @Prop({
+    type: SwaggerDefinition,
+  })
+  public schemas: Map<string, SwaggerDefinition>;
+}

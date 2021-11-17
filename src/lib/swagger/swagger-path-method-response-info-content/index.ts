@@ -20,4 +20,14 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+import { SwaggerPathMethodResponseInfoSchema } from '../swagger-path-method-response-info-schema';
+import { SwaggerPathMethodResponseInfoContentSchema } from '../swagger-path-method-response-info-content-schema';
+
+/**
+ * @class SwaggerPathMethodResponseInfoContent
+ */
+export class SwaggerPathMethodResponseInfoContent {
+  @Prop.default
+  public '*/*': SwaggerPathMethodResponseInfoContentSchema;
+}

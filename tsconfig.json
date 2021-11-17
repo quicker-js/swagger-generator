@@ -93,6 +93,7 @@
   "exclude": [
     "dist",
     "sample",
+    "apis",
     "node_modules",
     "**/*.spec.ts",
     "test/**"

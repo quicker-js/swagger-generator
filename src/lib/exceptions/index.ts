@@ -20,4 +20,5 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+export * from './exception';
+export * from './load-asset-exception';

@@ -20,4 +20,23 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Prop } from '@quicker-js/class-transformer';
+
+/**
+ * moment替换器
+ */
+export class MomentReplacer {
+  /**
+   * 格式化方式
+   */
+  @Prop.default
+  public format: string;
+
+  /**
+   * 是否启用
+   */
+  @Prop({
+    type: Boolean,
+  })
+  public enable = true;
+}

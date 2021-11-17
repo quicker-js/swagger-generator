@@ -20,4 +20,28 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Entity, Prop } from '@quicker-js/class-transformer';
+
+@Entity({
+  subTypes: [
+    {
+      type: 'name',
+    },
+  ],
+})
+/**
+ * 名称替换器
+ */
+export class NameReplacer {
+  @Prop.default
+  public test: RegExp;
+
+  /**
+   * 用来替换的value
+   */
+  @Prop.default
+  public value?: string;
+
+  @Prop.default
+  public type: string;
+}

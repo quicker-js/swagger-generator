@@ -20,4 +20,11 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+export * from './swagger';
+export * from './parse-handler';
+export * from './namespace-manager';
+export * from './import-manager';
+export * from './file-manager';
+export * from './exceptions';
+export * from './dependency';
+export * from './config';

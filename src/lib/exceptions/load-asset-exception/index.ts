@@ -20,4 +20,34 @@
  * SOFTWARE.
  */
 
-export * from './lib';
+import { Exception } from '../exception';
+
+export enum LoadAssetExceptionCode {
+  NOT_FOUND,
+}
+
+/**
+ * @class LoadAssetException
+ */
+export class LoadAssetException extends Exception {
+  public name = 'LoadAssetException';
+
+  /**
+   * 构造函数
+   * @param msg
+   * @param code
+   */
+  public constructor(msg: string, public code: LoadAssetExceptionCode) {
+    super(msg);
+  }
+
+  /**
+   * 创建 LoadAssetExceptionCode 实例
+   * @param code
+   */
+  public static create(
+    code: LoadAssetExceptionCode.NOT_FOUND
+  ): LoadAssetException {
+    return new LoadAssetException(LoadAssetExceptionCode[code], code);
+  }
+}
