@@ -111,6 +111,7 @@ export class FileManager extends EventEmitter {
     try {
       this.emit('beforeAssetsLoad');
       const swaggerApi = await this.loadFile();
+
       this.emit('assetsLoaded');
       this.swaggerApi = swaggerApi;
       this.emit('beforeAssetsParse');

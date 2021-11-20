@@ -83,11 +83,6 @@ export class SwaggerFile {
   private dependencies: Map<PropertyKey, Set<Dependency>> = new Map();
 
   /**
-   * 类装饰器列表
-   */
-  public decorators: Decorator[] = [];
-
-  /**
    * 构造函数
    * @param fileManager
    * @param fileName
@@ -134,7 +129,6 @@ export class SwaggerFile {
         }
       });
     }
-
     // 检测path是否有[0].参数 提取出新的path File对象
     if (pathMethod) {
       const groupBySubParameters = pathMethod.getGroupBySubParameters();
@@ -253,6 +247,7 @@ export class SwaggerFile {
 
     const file = this.createSourceFile();
     const sourceFile = this.createNode();
+
     ParserUtil.write(
       this.absolutePath,
       ParserUtil.unescape(
@@ -796,12 +791,6 @@ export class SwaggerFile {
                 members: new Set([newVar.fileName]),
               }
             );
-            const args: PropertyAssignment[] = [
-              factory.createPropertyAssignment(
-                'type',
-                factory.createIdentifier(newVar.fileName)
-              ),
-            ];
           }
 
           decorators.push(
@@ -1005,10 +994,10 @@ export class SwaggerFile {
           }
         }
         return factory.createArrayTypeNode(
-          factory.createKeywordTypeNode(SyntaxKind.AnyKeyword)
+          factory.createKeywordTypeNode(SyntaxKind.StringKeyword)
         );
       default:
-        return factory.createKeywordTypeNode(SyntaxKind.AnyKeyword);
+        return factory.createKeywordTypeNode(SyntaxKind.StringKeyword);
     }
   }
 
