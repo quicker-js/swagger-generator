@@ -85,37 +85,37 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@quicker-js/class-decorator@^0.0.1-dev.2021111301":
-  version "0.0.1-dev.2021111301"
-  resolved "https://registry.yarnpkg.com/@quicker-js/class-decorator/-/class-decorator-0.0.1-dev.2021111301.tgz#8a2a856e1a602692e2886966ad6fecee63103f9e"
-  integrity sha512-Z2srl2sRRbhRE3CfP9EJViZ+hOJC0osY6UYmLoPNfjO0e6XeUCZDgRPzfOTQOe18NILBxGP7Cn2m9oHzU8ciHg==
-  dependencies:
-    rimraf "^3.0.2"
-
-"@quicker-js/class-transformer@0.0.1-dev.2021111702":
+"@quicker-js/class-decorator@^0.0.1-dev.2021111702":
   version "0.0.1-dev.2021111702"
-  resolved "https://registry.yarnpkg.com/@quicker-js/class-transformer/-/class-transformer-0.0.1-dev.2021111702.tgz#d13576dcd4a7d20e1fd0ea258da3a90d1996980b"
-  integrity sha512-HZeV/pt9r4vHicuzTWhBlIqLIlVkn5q8IG8OC1Fz5RDVPge9fZwiHckmhHrQ/eIMnuPqRzKm9Hg9BID6jZ/2/A==
-  dependencies:
-    "@quicker-js/class-decorator" "^0.0.1-dev.2021111301"
-    tslib "^2.3.1"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-decorator/-/class-decorator-0.0.1-dev.2021111702.tgz#d6ca65d6895e8fb353ecd7a41c4d92ff2e5cd5e5"
+  integrity sha1-1spl1olej7NT7NekHE2S/y5c1eU=
 
-"@quicker-js/class-transformer@^0.0.1-dev.2021111305":
-  version "0.0.1-dev.2021111305"
-  resolved "https://registry.yarnpkg.com/@quicker-js/class-transformer/-/class-transformer-0.0.1-dev.2021111305.tgz#9a094c8d017f646f9f8a4d42c989265085951e24"
-  integrity sha512-XMD+tuFDFg2OdaIJl8GEOLGuZLgL9mNCx2pkP4VA8TFhsA2GThLNY09qrf+Cd616f9GnyemnkcAMcwsszfJvTA==
-  dependencies:
-    "@quicker-js/class-decorator" "^0.0.1-dev.2021111301"
-    tslib "^2.3.1"
+"@quicker-js/class-decorator@^1.0.0":
+  version "1.0.0"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-decorator/-/class-decorator-1.0.0.tgz#1fd76fa64e4e082a11ce498cf214c994808792d2"
+  integrity sha512-gpIPDhb3iijhQkFqdgb9+u6arF2kAo98EFO0qSNFuByRG2WMt8z+y0PPDzkSsG2DG+pvehY8kEwzCwh8FIPsOw==
 
-"@quicker-js/http@^0.0.1-dev.2021111706":
-  version "0.0.1-dev.2021111706"
-  resolved "https://registry.yarnpkg.com/@quicker-js/http/-/http-0.0.1-dev.2021111706.tgz#02cee31738827d087f7ea6372f61dc64a410f1f6"
-  integrity sha512-ne18sEtGRl/B18Bsm8gcv7bApnKPynXCoEngG4oqVbSIS8T9XTldulymTyrN5xuL/5gJWs7FKE3q9lZrjxW/zA==
+"@quicker-js/class-transformer@^0.0.1-dev.2021111705":
+  version "0.0.1-dev.2021111705"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-transformer/-/class-transformer-0.0.1-dev.2021111705.tgz#831d161e00c65779ec9b16bc2b65c0531f093933"
+  integrity sha1-gx0WHgDGV3nsmxa8K2XAUx8JOTM=
   dependencies:
-    "@quicker-js/class-transformer" "^0.0.1-dev.2021111305"
+    "@quicker-js/class-decorator" "^0.0.1-dev.2021111702"
+
+"@quicker-js/class-transformer@^1.0.2":
+  version "1.0.2"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-transformer/-/class-transformer-1.0.2.tgz#d1573382d0f238f29d25ae6714df4f8208bb5bab"
+  integrity sha512-EF4i22Ej6oqH20a+TgCap3QjUGGyE1oIcVlV0xTHJLFY4ftK16Nmcoqx0WCnFWazkpRV9FTTwyugxZYyllL5rw==
+  dependencies:
+    "@quicker-js/class-decorator" "^1.0.0"
+
+"@quicker-js/http@^0.0.1-dev.2021111713":
+  version "0.0.1-dev.2021111713"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fhttp/-/http-0.0.1-dev.2021111713.tgz#6abad6ac7474dce8962878c3df067033e50330c0"
+  integrity sha1-arrWrHR03OiWKHjD3wZwM+UDMMA=
+  dependencies:
+    "@quicker-js/class-transformer" "^0.0.1-dev.2021111705"
     axios "^0.24.0"
-    tslib "^2.3.1"
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"

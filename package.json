@@ -1,6 +1,6 @@
 {
   "name": "@quicker-js/swagger-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "swagger-generator is used to convert a swagger api to a class instance. support url or json file.",
   "main": "dist/cjs",
   "types": "dist/types",
@@ -51,7 +51,7 @@
     "@quicker-js/http": "^0.0.1-dev.2021111713"
   },
   "dependencies": {
-    "@quicker-js/class-transformer": "^1.0.1",
+    "@quicker-js/class-transformer": "^1.0.2",
     "@types/validator": "^13.6.6",
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
