@@ -21,9 +21,9 @@
  */
 
 /**
- * @class ImportManager
+ * @class ImportSources
  */
-export class ImportManager extends Map<
+export class ImportSources extends Map<
   string,
   { default?: string; members: Set<string> }
 > {

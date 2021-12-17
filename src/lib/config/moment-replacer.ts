@@ -30,7 +30,10 @@ export class MomentReplacer {
    * 格式化方式
    */
   @Prop.default
-  public format: string;
+  public dateTime = 'YYYY-MM-DD HH:mm:ss';
+
+  @Prop.default
+  public date = 'YYYY-MM-DD';
 
   /**
    * 是否启用

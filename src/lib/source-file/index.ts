@@ -20,18 +20,54 @@
  * SOFTWARE.
  */
 
-import { FileManager } from '../file-manager';
-import { ParseHandler } from '../parse-handler';
+import { Source } from '../source';
+import { SourceFileProperty } from '../source-file-property';
 
 /**
- * @class NamespaceManager
+ * 资源文件
+ * @class SourceFile
  */
-export class NamespaceManager extends Map<string, FileManager> {
+export abstract class SourceFile implements SourceFileImpl {
   /**
    * 构造函数
-   * @param handler
+   * @param source 资源对象
+   * @param fileName 文件名称
+   * @param filePath 文件路径
+   * @param isGlobal 是否为全局文件
    */
-  public constructor(public readonly handler: ParseHandler) {
-    super();
-  }
+  protected constructor(
+    public source: Source,
+    public fileName: string,
+    public filePath: string,
+    public readonly isGlobal: boolean = false
+  ) {}
+
+  /**
+   * 获取描述
+   * @public
+   */
+  public abstract getDescription(): string | undefined;
+
+  /**
+   * 获取成员列表
+   * @protected
+   */
+  public abstract getProperties(): SourceFileProperty[];
+
+  /**
+   * 资源绝对路径
+   */
+  public abstract absolute: string;
+
+  /**
+   * 原始绝对路径 便于global文件查找资源
+   */
+  public abstract originAbsolutePath: string;
+}
+
+export interface SourceFileImpl {
+  readonly isGlobal?: boolean;
+  source: Source;
+  fileName: string;
+  filePath: string;
 }

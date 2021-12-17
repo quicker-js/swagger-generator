@@ -19,12 +19,19 @@ program
   .allowUnknownOption(true)
   .description('生成接口文件')
   .action(async (a, b) => {
-    if (Array.isArray(b) && b.includes('--development')) {
-      process.env.OAS_DEV_ENV = 'YES';
+    if (typeof b === 'object' && Array.isArray(b.args)) {
+      if (b.args.includes('--development')) {
+        process.env.OAS_DEV_ENV = 'YES';
+      }
+
+      if (b.args.includes('--js')) {
+        process.env.OAS_FILE_TYPE = 'js';
+      }
     }
+
     const date = new Date();
     const parseHandler = ParseHandler.create();
-    await parseHandler.generator();
+    await parseHandler.start();
     console.log('\n======================================');
     console.log(
       chalk.green(`总共耗时 | ${new Date().getTime() - date.getTime()}ms`)

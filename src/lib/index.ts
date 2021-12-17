@@ -22,9 +22,11 @@
 
 export * from './swagger';
 export * from './parse-handler';
-export * from './namespace-manager';
-export * from './import-manager';
-export * from './file-manager';
+export * from './import-sources';
+export * from './source';
+export * from './source-file';
+export * from './source-file-property';
+export * from './model-source-file';
+export * from './path-source-file';
 export * from './exceptions';
-export * from './dependency';
 export * from './config';

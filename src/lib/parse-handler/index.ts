@@ -24,45 +24,36 @@ import fs from 'fs';
 import path from 'path';
 import { Config } from '../config';
 import classTransformer from '@quicker-js/class-transformer';
-import { NamespaceManager } from '../namespace-manager';
-import { FileManager } from '../file-manager';
 import { createPrinter, NewLineKind } from 'typescript';
+import { SourceManager } from '../source-manager';
 
 /**
  * @class ParseHandler
  */
 export class ParseHandler {
+  public readonly sourceManager: SourceManager;
+
   /**
    * 构造函数
    * @param config
    */
   public constructor(public config: Config) {
-    // 加载资源文件
-    this.loadAssets();
+    this.sourceManager = SourceManager.create({
+      namespaces: config.namespaces,
+      handler: this,
+    });
   }
 
   /**
-   * 命名空间管理器
-   * @private
+   * 启动解析
    */
-  private namespaceManager = new NamespaceManager(this);
-
-  /**
-   * 加载资源
-   */
-  public loadAssets(): void {
-    const { config, namespaceManager } = this;
-    const { namespaces } = config;
-    namespaces.forEach((assetPath, namespace) => {
-      this.namespaceManager.set(
-        namespace,
-        FileManager.create({
-          assetPath,
-          namespaceManager,
-          namespace,
-        })
-      );
-    });
+  public async start(): Promise<void> {
+    // 解析阶段
+    await this.sourceManager.parse();
+    // 创建阶段
+    this.sourceManager.create();
+    // 生成阶段
+    await this.sourceManager.generator();
   }
 
   /**
@@ -76,21 +67,7 @@ export class ParseHandler {
    * 文件总数量
    */
   public get fileCount(): number {
-    let i = 0;
-    for (const fileManager of this.namespaceManager.values()) {
-      i += fileManager.paths.size;
-      i += fileManager.definitions.size;
-    }
-    return i;
-  }
-
-  /**
-   * 生成文件
-   */
-  public async generator(): Promise<void> {
-    for (const fileManager of this.namespaceManager.values()) {
-      await fileManager.parse();
-    }
+    return this.sourceManager.files.size;
   }
 
   /**
@@ -129,10 +106,15 @@ export class ParseHandler {
       .filter((s) => s && !ParseHandler.nameRegexp.test(s))
       .map((s) => {
         const list: string[] = [];
-        const regexp = /[A-Z]?[a-z0-9]+/g;
+        const regexp = /[A-Z]+[a-z0-9]*/g;
         let match: RegExpExecArray | null = null;
         do {
-          match = regexp.exec(s);
+          const exec = regexp.exec(s);
+          if (exec && exec[0]) {
+            match = exec;
+          } else {
+            match = null;
+          }
           if (match) {
             list.push(match[0]);
           }

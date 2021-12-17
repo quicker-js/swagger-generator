@@ -36,39 +36,47 @@ export class Config {
   @Prop({
     type: String,
   })
-  public namespaces: Map<string, string> = new Map();
+  public readonly namespaces: Map<string, string> = new Map();
 
   /**
    * api输出目录
    */
   @Prop.default
-  public output: string = path.resolve('src', 'apis');
+  public readonly output: string = path.resolve('src', 'apis');
 
   /**
    * 文件名称的命名方式 有camelCase命名方式和kebabCase命名方法
    * 默认kebabCase
    */
   @Prop.default
-  public caseType: 'camelCase' | 'kebabCase' = 'kebabCase';
+  public readonly caseType: 'camelCase' | 'kebabCase' = 'kebabCase';
 
   /**
    * 最大文件数量
    */
   @Prop.default
-  public fileMax = 10000;
+  public readonly fileMax = 10000;
 
   /**
    * 是否允许生成泛型约束
    */
   @Prop.default
-  public allowTypeParameterDeclarations = false;
+  public readonly allowTypeParameterDeclarations = false;
 
   /**
    * 需要安装moment库
    * 是否允许用moment替换Date类型
    */
   @Prop.default
-  public moment: MomentReplacer = new MomentReplacer();
+  public readonly moment: MomentReplacer = new MomentReplacer();
+
+  /**
+   * 全局文件
+   */
+  @Prop({
+    type: RegExp,
+  })
+  public readonly globalFiles: RegExp[] = [];
 
   /**
    * 替换规则
@@ -76,17 +84,20 @@ export class Config {
   @Prop({
     subTypes: SubType.fromTypes(NameReplacer, PathReplacer),
   })
-  public replaces: NameReplacer[] | PathReplacer[] = [];
+  public readonly replaces: NameReplacer[] | PathReplacer[] = [];
 
+  /**
+   * 过滤文件
+   */
   @Prop({
     type: RegExp,
   })
-  public excludes: RegExp[] = [];
+  public readonly excludes: RegExp[] = [];
 
   /**
    * 生成的文档版本
    * 版本号
    */
   @Prop.default
-  public version?: string = '0.0.1';
+  public readonly version?: string = '0.0.1';
 }
