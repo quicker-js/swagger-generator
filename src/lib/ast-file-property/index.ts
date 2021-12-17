@@ -271,7 +271,9 @@ export class AstFileProperty implements AstFilePropertyImpl {
             'type',
             factory.createPropertyAssignment(
               factory.createIdentifier('type'),
-              factory.createIdentifier(name)
+              name === this.astFile.fileName
+                ? factory.createStringLiteral('self')
+                : factory.createIdentifier(name)
             )
           );
         }

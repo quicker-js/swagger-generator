@@ -21,6 +21,7 @@
  */
 
 import { Prop } from '@quicker-js/class-transformer';
+import { SwaggerPathMethodSchema } from '../swagger-path-method-schema';
 
 /**
  * @class SwaggerPathMethodResponseInfoSchema
@@ -37,4 +38,7 @@ export class SwaggerPathMethodResponseInfoSchema {
 
   @Prop.default
   public type?: string;
+
+  @Prop.default
+  public items?: SwaggerPathMethodSchema;
 }

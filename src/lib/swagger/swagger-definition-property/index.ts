@@ -67,9 +67,9 @@ export class SwaggerDefinitionProperty {
       if (this.items.$ref) {
         return this.items.$ref;
       }
-      if (this.items.type) {
-        return this.items.type;
-      }
+      // if (this.items.type && this.items.items) {
+      //   return this.items.items.type;
+      // }
     }
     return '';
   }
