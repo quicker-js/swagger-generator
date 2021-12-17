@@ -153,12 +153,14 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
 
     const fileName = ParseHandler.nameParser(name, 'camelCase');
 
+    const filePath = handler.fileNameParser(name);
+
     const isGlobal = !!globalFiles.find((o) => o.test(fileName));
 
     return PathSourceFile.create({
       source,
-      fileName: ParseHandler.nameParser(name, 'camelCase'),
-      filePath: handler.fileNameParser(name),
+      fileName,
+      filePath,
       method,
       pathMethod,
       isGlobal,

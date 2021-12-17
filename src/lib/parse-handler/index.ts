@@ -105,6 +105,7 @@ export class ParseHandler {
       .split(ParseHandler.nameRegexp)
       .filter((s) => s && !ParseHandler.nameRegexp.test(s))
       .map((s) => {
+        s = s.charAt(0).toUpperCase() + s.substr(1);
         const list: string[] = [];
         const regexp = /[A-Z]+[a-z0-9]*/g;
         let match: RegExpExecArray | null = null;
@@ -125,7 +126,7 @@ export class ParseHandler {
             if (type === 'kebabCase') {
               return i.toLowerCase();
             } else {
-              return i.charAt(0).toUpperCase() + i.substr(1);
+              return i.charAt(0).toUpperCase() + i.substring(1);
             }
           })
           .join(type === 'kebabCase' ? '-' : '');
