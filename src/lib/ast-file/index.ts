@@ -180,31 +180,8 @@ export class AstFile implements AstFileImpl {
   private getImportDeclarations(): ImportDeclaration[] {
     const list: ImportDeclaration[] = [];
     this.imports.forEach((value, path) => {
+      // 不能包含自己
       if (value.members && !value.members.has(this.fileName)) {
-        list.push(
-          factory.createImportDeclaration(
-            undefined,
-            undefined,
-            factory.createImportClause(
-              false,
-              value.default
-                ? factory.createIdentifier(value.default)
-                : undefined,
-              factory.createNamedImports(
-                Array.from(value.members).map((item) =>
-                  factory.createImportSpecifier(
-                    undefined,
-                    factory.createIdentifier(
-                      ParserUtil.removeGenericParameter(item)
-                    )
-                  )
-                )
-              )
-            ),
-            factory.createStringLiteral(path.replace(/\.ts$/, ''))
-          )
-        );
-      } else {
         list.push(
           factory.createImportDeclaration(
             undefined,
