@@ -130,45 +130,46 @@ export class ParserUtil {
    */
   public static async write(fileName: string, file: string): Promise<void> {
     try {
-      if (
-        (ParserUtil.overwrite === 0 ||
-          ParserUtil.overwrite === 1 ||
-          ParserUtil.overwrite === 3) &&
-        fs.existsSync(fileName)
-      ) {
-        const { overwrite } = await inquirer.prompt([
-          {
-            type: 'rawlist',
-            message: '当前文件已存在，是否覆盖文件，输入数字继续',
-            name: 'overwrite',
-            choices: [
-              {
-                key: 1,
-                name: '覆盖当前',
-                value: 1,
-              },
-              {
-                key: 2,
-                name: '覆盖所有',
-                value: 2,
-              },
-              {
-                key: 3,
-                name: '跳过当前',
-                value: 3,
-              },
-              {
-                key: 4,
-                name: '跳过所有',
-                value: 4,
-              },
-            ],
-          },
-        ]);
-        ParserUtil.overwrite = overwrite;
+      const isExists = fs.existsSync(fileName);
+      if (isExists) {
+        if (ParserUtil.overwrite !== 2 && ParserUtil.overwrite !== 4) {
+          const { overwrite } = await inquirer.prompt([
+            {
+              type: 'rawlist',
+              message: '当前文件已存在，是否覆盖文件，输入数字继续',
+              name: 'overwrite',
+              choices: [
+                {
+                  key: 1,
+                  name: '覆盖当前',
+                  value: 1,
+                },
+                {
+                  key: 2,
+                  name: '覆盖所有',
+                  value: 2,
+                },
+                {
+                  key: 3,
+                  name: '跳过当前',
+                  value: 3,
+                },
+                {
+                  key: 4,
+                  name: '跳过所有',
+                  value: 4,
+                },
+              ],
+            },
+          ]);
+          ParserUtil.overwrite = overwrite;
+        }
       }
 
-      if (ParserUtil.overwrite === 1 || ParserUtil.overwrite === 2) {
+      const isOverwriteAll = isExists && ParserUtil.overwrite === 2;
+      const isOverwriteCurrent = isExists && ParserUtil.overwrite === 1;
+
+      if (!isExists || isOverwriteAll || isOverwriteCurrent) {
         ParserUtil.createDir(fileName);
         if (process.env.OAS_FILE_TYPE) {
           fileName = fileName.replace(/\.ts$/, '.js');

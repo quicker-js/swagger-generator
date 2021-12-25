@@ -428,6 +428,108 @@
         "deprecated": false
       }
     },
+    "/order/online/confirm/test": {
+      "put": {
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "确认订单",
+        "description": "确认订单",
+        "operationId": "confirmOrderUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cancelReason",
+            "in": "query",
+            "description": "取消原因",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cancelType",
+            "in": "query",
+            "description": "商户取消类型",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "USER_REQUESTED_CANCEL",
+              "SHOP_BUSY",
+              "PRODUCT_SOLD_OUT",
+              "EXCEED_RANGE",
+              "SHOP_CLOSE",
+              "USER_INFO_ERR",
+              "REPEAT_ORDER"
+            ]
+          },
+          {
+            "name": "orderId",
+            "in": "query",
+            "description": "订单ID",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "products[0].id",
+            "in": "query",
+            "description": "订单商品主键",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "products[0].quantity",
+            "in": "query",
+            "description": "商品数量",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "refundId",
+            "in": "query",
+            "description": "退款主键ID",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "refuseReason",
+            "in": "query",
+            "description": "拒绝原因",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "originalRef": "ResponseResult",
+              "$ref": "#/definitions/ResponseResult"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/order/online/pickcomplete": {
       "put": {
         "tags": [

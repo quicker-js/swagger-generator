@@ -26,6 +26,7 @@ import {
   ObjectLiteralExpression,
   PropertyAssignment,
   PropertyDeclaration,
+  QuestionToken,
   SyntaxKind,
   TypeNode,
 } from 'typescript';
@@ -449,10 +450,27 @@ export class AstFileProperty implements AstFilePropertyImpl {
       this.getDecorators(),
       [factory.createModifier(SyntaxKind.PublicKeyword)],
       this.name,
-      undefined,
+      this.getQuestionOrExclamationToken(),
       this.getTypeNode(),
       undefined
     );
+  }
+
+  /**
+   * 获取QuestionOrExclamationToken
+   */
+  public getQuestionOrExclamationToken(): QuestionToken | undefined {
+    if (
+      Array.from(this.sourceProperties).every(
+        (o) =>
+          o.property instanceof SwaggerPathMethodParameter &&
+          !o.property.required
+      )
+    ) {
+      return factory.createToken(SyntaxKind.QuestionToken);
+    }
+
+    return undefined;
   }
 
   /**
