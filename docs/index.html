@@ -10,6 +10,48 @@
 <pre><code class="language-shell"><span class="hl-0">npm i @quicker-js/swagger-generator</span><br/><span class="hl-1">#or</span><br/><span class="hl-0">yarn add @quicker-js/swagger-generator</span>
 </code></pre>
 
+<a href="#useage" id="useage" style="color: inherit; text-decoration: none;">
+  <h2>UseAge</h2>
+</a>
+<p>Create <code>swagger-generator.config.js</code> in the root directory of the project.</p>
+<pre><code class="language-js"><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">namespaces:</span><span class="hl-0"> {},</span><br/><span class="hl-0">  </span><span class="hl-3">output:</span><span class="hl-0"> </span><span class="hl-3">path</span><span class="hl-0">.</span><span class="hl-4">resolve</span><span class="hl-0">(</span><span class="hl-5">&#39;src&#39;</span><span class="hl-0">, </span><span class="hl-5">&#39;api&#39;</span><span class="hl-0">),</span><br/><span class="hl-0">  </span><span class="hl-3">globalFiles:</span><span class="hl-0"> [],</span><br/><span class="hl-0">  </span><span class="hl-3">replaces:</span><span class="hl-0"> [],</span><br/><span class="hl-0">  </span><span class="hl-3">excludes:</span><span class="hl-0"> [],</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#namespaces" id="namespaces" style="color: inherit; text-decoration: none;">
+  <h3>namespaces</h3>
+</a>
+<p>This option is added in the form of keyValue, which can be a URL or a local file</p>
+<pre><code class="language-js"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">path</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-5">&#39;path&#39;</span><span class="hl-0">)</span><br/><span class="hl-1">// &quot;system.json&quot; in project the root directory.</span><br/><span class="hl-1">// &quot;system.json&quot; should a &quot;swagger&quot; json file.</span><br/><span class="hl-1">// fetch the &quot;https://app.com/test/v2/api-docs&quot; url should response a &quot;swagger&quot; json file.</span><br/><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">namespaces:</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">system:</span><span class="hl-0"> </span><span class="hl-3">path</span><span class="hl-0">.</span><span class="hl-4">resolve</span><span class="hl-0">(</span><span class="hl-5">&#39;system.json&#39;</span><span class="hl-0">),</span><br/><span class="hl-0">    </span><span class="hl-3">test:</span><span class="hl-0"> </span><span class="hl-5">&#39;https://app.com/test/v2/api-docs&#39;</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#output" id="output" style="color: inherit; text-decoration: none;">
+  <h3>output</h3>
+</a>
+<p>This option specifies the directory where the model file is generated.</p>
+<pre><code class="language-js"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">path</span><span class="hl-0"> = </span><span class="hl-4">require</span><span class="hl-0">(</span><span class="hl-5">&#39;path&#39;</span><span class="hl-0">)</span><br/><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">output:</span><span class="hl-0"> </span><span class="hl-3">path</span><span class="hl-0">.</span><span class="hl-4">resolve</span><span class="hl-0">(</span><span class="hl-5">&#39;src&#39;</span><span class="hl-0">, </span><span class="hl-5">&#39;api&#39;</span><span class="hl-0">),</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#globalfiles" id="globalfiles" style="color: inherit; text-decoration: none;">
+  <h3>globalFiles</h3>
+</a>
+<p>This option is used to specify some generic class models, which are generally shared by the whole project.</p>
+<pre><code class="language-js"><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">globalFiles:</span><span class="hl-0"> [</span><span class="hl-5">&#39;ResponseList&#39;</span><span class="hl-0">, </span><span class="hl-5">&#39;PageList&#39;</span><span class="hl-0">],</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#replaces" id="replaces" style="color: inherit; text-decoration: none;">
+  <h3>replaces</h3>
+</a>
+<p>This option is used to replace the path path or model name in the model.</p>
+<pre><code class="language-js"><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">replaces:</span><span class="hl-0"> [</span><br/><span class="hl-0">    {</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace version number in path</span><br/><span class="hl-0">      </span><span class="hl-1">// For example, from:</span><br/><span class="hl-0">      </span><span class="hl-1">// @ApiRequest({</span><br/><span class="hl-0">      </span><span class="hl-1">//   url: &#39;/order-v100001/info/{id}&#39;,</span><br/><span class="hl-0">      </span><span class="hl-1">// })</span><br/><span class="hl-0">      </span><span class="hl-1">// to:</span><br/><span class="hl-0">      </span><span class="hl-1">// @ApiRequest({</span><br/><span class="hl-0">      </span><span class="hl-1">//   url: &#39;/order/info/{id}&#39;,</span><br/><span class="hl-0">      </span><span class="hl-1">// })</span><br/><span class="hl-0">      </span><span class="hl-3">test:</span><span class="hl-8"> /-v100001/</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace value</span><br/><span class="hl-0">      </span><span class="hl-3">value:</span><span class="hl-0"> </span><span class="hl-5">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace type is path</span><br/><span class="hl-0">      </span><span class="hl-3">type:</span><span class="hl-0"> </span><span class="hl-5">&#39;path&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">    {</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace model name in name</span><br/><span class="hl-0">      </span><span class="hl-1">// For example, ResponseResult will be replaced with R</span><br/><span class="hl-0">      </span><span class="hl-3">test:</span><span class="hl-8"> /</span><span class="hl-9">^</span><span class="hl-8">ResponseResult/</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace value</span><br/><span class="hl-0">      </span><span class="hl-3">value:</span><span class="hl-0"> </span><span class="hl-5">&#39;R&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">      </span><span class="hl-1">// Replace type is name</span><br/><span class="hl-0">      </span><span class="hl-3">type:</span><span class="hl-0"> </span><span class="hl-5">&#39;name&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">  ],</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#excludes" id="excludes" style="color: inherit; text-decoration: none;">
+  <h3>excludes</h3>
+</a>
+<p>This option specifies which model names are excluded from the build file.</p>
+<pre><code class="language-js"><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-1">// Can be string or regexp.</span><br/><span class="hl-0">  </span><span class="hl-3">excludes:</span><span class="hl-0"> [</span><br/><span class="hl-0">    </span><span class="hl-8">/</span><span class="hl-10">\P</span><span class="hl-8">ageData/</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-5">&#39;PageData&#39;</span><br/><span class="hl-0">  ]</span><br/><span class="hl-0">}</span>
+</code></pre>
+
 <a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
   <h2>Documentation</h2>
 </a>
