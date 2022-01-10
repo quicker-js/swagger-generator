@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 import { SwaggerPathMethodSchema } from '../swagger-path-method-schema';
 
 /**
@@ -30,15 +30,15 @@ export class SwaggerPathMethodResponseInfoSchema {
   /**
    * only 2.0
    */
-  @Prop.default
+  @Typed()
   public originalRef?: string;
 
-  @Prop.default
+  @Typed()
   public $ref?: string;
 
-  @Prop.default
+  @Typed()
   public type?: string;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodSchema)
   public items?: SwaggerPathMethodSchema;
 }

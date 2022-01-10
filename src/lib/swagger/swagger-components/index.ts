@@ -20,15 +20,13 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { TypedMap } from '@quicker-js/class-transformer';
 import { SwaggerDefinition } from '../swagger-definition';
 
 /**
  * @class SwaggerComponents
  */
 export class SwaggerComponents {
-  @Prop({
-    type: SwaggerDefinition,
-  })
+  @TypedMap(SwaggerDefinition)
   public schemas: Map<string, SwaggerDefinition>;
 }

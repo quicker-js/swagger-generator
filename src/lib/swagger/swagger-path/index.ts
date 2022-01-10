@@ -20,22 +20,22 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 import { SwaggerPathMethod } from '../swagger-path-method';
 
 /**
  * @class SwaggerPath
  */
 export class SwaggerPath {
-  @Prop.default
+  @Typed(SwaggerPathMethod)
   public get?: SwaggerPathMethod;
 
-  @Prop.default
+  @Typed(SwaggerPathMethod)
   public post?: SwaggerPathMethod;
 
-  @Prop.default
+  @Typed(SwaggerPathMethod)
   public delete?: SwaggerPathMethod;
 
-  @Prop.default
+  @Typed(SwaggerPathMethod)
   public put?: SwaggerPathMethod;
 }

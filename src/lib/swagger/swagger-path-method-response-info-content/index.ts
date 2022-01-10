@@ -20,14 +20,13 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
-import { SwaggerPathMethodResponseInfoSchema } from '../swagger-path-method-response-info-schema';
+import { Typed } from '@quicker-js/class-transformer';
 import { SwaggerPathMethodResponseInfoContentSchema } from '../swagger-path-method-response-info-content-schema';
 
 /**
  * @class SwaggerPathMethodResponseInfoContent
  */
 export class SwaggerPathMethodResponseInfoContent {
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfoContentSchema)
   public '*/*': SwaggerPathMethodResponseInfoContentSchema;
 }

@@ -23,7 +23,7 @@
 import {
   Decorator,
   factory,
-  ObjectLiteralExpression,
+  // ObjectLiteralExpression,
   PropertyAssignment,
   PropertyDeclaration,
   QuestionToken,
@@ -128,7 +128,7 @@ export class AstFileProperty implements AstFilePropertyImpl {
     const decorators: Decorator[] = [];
     const propDecorators: Decorator[] = [];
     const decoratorApiPropertyArgs: Map<string, PropertyAssignment> = new Map();
-    const decoratorPropArgs: Map<string, PropertyAssignment> = new Map();
+    // const decoratorPropArgs: Map<string, PropertyAssignment> = new Map();
     const descriptions: string[] = [];
 
     this.sourceProperties.forEach((o) => {
@@ -213,7 +213,16 @@ export class AstFileProperty implements AstFilePropertyImpl {
       );
     }
 
-    const scenesArgs: ObjectLiteralExpression[] = [];
+    const scenesMap = new Map<
+      string,
+      Map<
+        string,
+        Array<{
+          value: string;
+          subValue?: string;
+        }>
+      >
+    >();
 
     this.sourceProperties.forEach((o) => {
       if (o.ref) {
@@ -229,54 +238,28 @@ export class AstFileProperty implements AstFilePropertyImpl {
           ) {
             name = 'Number';
           }
-          if (o.type === 'array') {
-            scenesArgs.push(
-              factory.createObjectLiteralExpression(
-                [
-                  factory.createPropertyAssignment(
-                    factory.createIdentifier('type'),
-                    factory.createIdentifier('Array')
-                  ),
-                  factory.createPropertyAssignment(
-                    factory.createIdentifier('elementType'),
-                    factory.createIdentifier(name)
-                  ),
-                  factory.createPropertyAssignment(
-                    factory.createIdentifier('value'),
-                    factory.createStringLiteral(
-                      Array.from(o.sourceFile.originGenerics)[0]
-                    )
-                  ),
-                ],
-                true
-              )
-            );
-          } else {
-            scenesArgs.push(
-              factory.createObjectLiteralExpression([
-                factory.createPropertyAssignment(
-                  factory.createIdentifier('type'),
-                  factory.createIdentifier(name)
-                ),
-                factory.createPropertyAssignment(
-                  factory.createIdentifier('value'),
-                  factory.createStringLiteral(
-                    Array.from(o.sourceFile.originGenerics)[0]
-                  )
-                ),
-              ])
-            );
-          }
+          const decoratorName = o.type === 'array' ? 'TypedArray' : 'Typed';
+          const map =
+            scenesMap.get(decoratorName) ||
+            new Map<string, Array<{ value: string; subValue?: string }>>();
+
+          const list = map.get(name) || [];
+          const value = Array.from(o.sourceFile.originGenerics)[0];
+          const subValue =
+            value && ParserUtil.getGenericParameter(value)
+              ? ParserUtil.getGenericParameter(value)
+              : undefined;
+          list.push({
+            value,
+            subValue,
+          });
+          map.set(name, list);
+          scenesMap.set(decoratorName, map);
         } else {
-          decoratorPropArgs.set(
-            'type',
-            factory.createPropertyAssignment(
-              factory.createIdentifier('type'),
-              name === this.astFile.fileName
-                ? factory.createStringLiteral('self')
-                : factory.createIdentifier(name)
-            )
-          );
+          const map = scenesMap.get('Typed') || new Map();
+          const list = map.get(name) || [];
+          map.set(name, list);
+          scenesMap.set('Typed', map);
         }
       } else {
         const { dateTime, date, enable } = this.astFile.handler.config.moment;
@@ -284,12 +267,16 @@ export class AstFileProperty implements AstFilePropertyImpl {
           this.astFile.imports.set('moment', {
             default: 'moment',
           });
+          this.astFile.imports.set('@quicker-js/class-transformer', {
+            members: new Set(['Typed']),
+          });
           propDecorators.push(
             factory.createDecorator(
               factory.createCallExpression(
-                factory.createIdentifier('Prop'),
+                factory.createIdentifier('Typed'),
                 undefined,
                 [
+                  factory.createIdentifier('Date'),
                   factory.createObjectLiteralExpression(
                     [
                       factory.createPropertyAssignment(
@@ -342,9 +329,10 @@ export class AstFileProperty implements AstFilePropertyImpl {
             ),
             factory.createDecorator(
               factory.createCallExpression(
-                factory.createIdentifier('Prop'),
+                factory.createIdentifier('Typed'),
                 undefined,
                 [
+                  factory.createIdentifier('Date'),
                   factory.createObjectLiteralExpression(
                     [
                       factory.createPropertyAssignment(
@@ -389,51 +377,71 @@ export class AstFileProperty implements AstFilePropertyImpl {
       }
     });
 
-    if (scenesArgs.length) {
+    scenesMap.forEach((value, decoratorName) => {
       this.astFile.imports.set('@quicker-js/class-transformer', {
-        members: new Set(['Scene']),
+        members: new Set([decoratorName]),
       });
-      decoratorPropArgs.set(
-        'scenes',
-        factory.createPropertyAssignment(
-          factory.createIdentifier('scenes'),
-          factory.createCallExpression(
-            factory.createPropertyAccessExpression(
-              factory.createIdentifier('Scene'),
-              factory.createIdentifier('from')
-            ),
-            undefined,
-            scenesArgs
-          )
-        )
-      );
-    }
 
-    if (decoratorPropArgs.size) {
-      propDecorators.push(
-        factory.createDecorator(
-          factory.createCallExpression(
-            factory.createIdentifier('Prop'),
-            undefined,
-            [
-              factory.createObjectLiteralExpression(
-                Array.from(decoratorPropArgs.values()),
-                true
-              ),
-            ]
+      value.forEach((scenes, typeName, k) => {
+        propDecorators.push(
+          factory.createDecorator(
+            factory.createCallExpression(
+              factory.createIdentifier(decoratorName),
+              undefined,
+              scenes.length
+                ? [
+                    factory.createIdentifier(typeName),
+                    factory.createObjectLiteralExpression(
+                      [
+                        factory.createPropertyAssignment(
+                          factory.createIdentifier('scenes'),
+                          factory.createArrayLiteralExpression(
+                            scenes.map((o) =>
+                              factory.createObjectLiteralExpression(
+                                o.subValue
+                                  ? [
+                                      factory.createPropertyAssignment(
+                                        factory.createIdentifier('value'),
+                                        factory.createStringLiteral(o.value)
+                                      ),
+                                      factory.createPropertyAssignment(
+                                        factory.createIdentifier('subValue'),
+                                        factory.createStringLiteral(o.subValue)
+                                      ),
+                                    ]
+                                  : [
+                                      factory.createPropertyAssignment(
+                                        factory.createIdentifier('value'),
+                                        factory.createStringLiteral(o.value)
+                                      ),
+                                    ]
+                              )
+                            )
+                          )
+                        ),
+                      ],
+                      true
+                    ),
+                  ]
+                : [factory.createIdentifier(typeName)]
+            )
           )
-        )
-      );
-    }
+        );
+      });
+    });
 
     if (propDecorators.length) {
       decorators.push(...propDecorators);
     } else {
+      this.astFile.imports.set('@quicker-js/class-transformer', {
+        members: new Set(['Typed']),
+      });
       decorators.push(
         factory.createDecorator(
-          factory.createPropertyAccessExpression(
-            factory.createIdentifier('Prop'),
-            factory.createIdentifier('default')
+          factory.createCallExpression(
+            factory.createIdentifier('Typed'),
+            undefined,
+            []
           )
         )
       );

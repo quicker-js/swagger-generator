@@ -354,10 +354,6 @@ export class AstFile implements AstFileImpl {
       this.imports.set('@quicker-js/http', {
         members: new Set(['ApiProperty']),
       });
-
-      this.imports.set('@quicker-js/class-transformer', {
-        members: new Set(['Prop']),
-      });
     }
 
     this.properties.forEach((o) => {

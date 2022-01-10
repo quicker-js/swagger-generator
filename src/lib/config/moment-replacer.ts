@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
 /**
  * moment替换器
@@ -29,17 +29,15 @@ export class MomentReplacer {
   /**
    * 格式化方式
    */
-  @Prop.default
+  @Typed(String)
   public dateTime = 'YYYY-MM-DD HH:mm:ss';
 
-  @Prop.default
+  @Typed(String)
   public date = 'YYYY-MM-DD';
 
   /**
    * 是否启用
    */
-  @Prop({
-    type: Boolean,
-  })
+  @Typed(Boolean)
   public enable = true;
 }

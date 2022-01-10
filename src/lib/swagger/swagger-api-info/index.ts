@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
 /**
  * @class SwaggerApiInfo
@@ -29,18 +29,18 @@ export class SwaggerApiInfo {
   /**
    * 标题
    */
-  @Prop.default
+  @Typed()
   public title: string;
 
   /**
    * 描述
    */
-  @Prop.default
+  @Typed()
   public description: string;
 
   /**
    * 版本号
    */
-  @Prop.default
+  @Typed()
   public version: string;
 }

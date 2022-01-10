@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
 /**
  * @class SwaggerApiServer
@@ -29,12 +29,12 @@ export class SwaggerApiServer {
   /**
    * 地址
    */
-  @Prop.default
+  @Typed()
   public url: string;
 
   /**
    * 描述
    */
-  @Prop.default
+  @Typed()
   public description: string;
 }

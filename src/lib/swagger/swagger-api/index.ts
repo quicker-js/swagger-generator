@@ -20,7 +20,12 @@
  * SOFTWARE.
  */
 
-import { Entity, Prop } from '@quicker-js/class-transformer';
+import {
+  Entity,
+  Typed,
+  TypedArray,
+  TypedMap,
+} from '@quicker-js/class-transformer';
 import { SwaggerApiInfo } from '../swagger-api-info';
 import { SwaggerApiServer } from '../swagger-api-server';
 import { SwaggerApiTag } from '../swagger-api-tag';
@@ -39,74 +44,66 @@ export class SwaggerApi {
   /**
    * open api版本
    */
-  @Prop.default
+  @Typed()
   public openapi: string;
 
   /**
    * open api版本
    * only 2.0
    */
-  @Prop.default
+  @Typed()
   public swagger: string;
 
   /**
    * 文档信息
    */
-  @Prop.default
+  @Typed()
   public info: SwaggerApiInfo;
 
   /**
    * 服务端地址
    */
-  @Prop({
-    type: SwaggerApiServer,
-  })
+  @TypedArray(SwaggerApiServer)
   public servers: SwaggerApiServer[];
 
   /**
    * tags
    */
-  @Prop({
-    type: SwaggerApiTag,
-  })
+  @TypedArray(SwaggerApiTag)
   public tags: SwaggerApiTag[];
 
   /**
    * host
    * only 2.0
    */
-  @Prop.default
+  @Typed()
   public host?: string;
 
   /**
    * 基础路径
    * only 2.0
    */
-  @Prop.default
+  @Typed()
   public basePath: string;
 
   /**
    * Model集合
    * only 2.0
    */
-  @Prop({
-    type: SwaggerDefinition,
-  })
+  @TypedMap(SwaggerDefinition)
   private definitions: Map<string, SwaggerDefinition>;
 
   /**
    * path集合
    */
-  @Prop({
-    type: SwaggerPath,
-  })
+  @TypedMap(SwaggerPath)
   public paths: Map<string, SwaggerPath>;
 
   /**
    * Model集合
    * only 3.0
    */
-  @Prop.default
+  @Typed(SwaggerComponents)
   private components: SwaggerComponents;
 
   /**

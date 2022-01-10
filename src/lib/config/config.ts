@@ -20,7 +20,12 @@
  * SOFTWARE.
  */
 
-import { Prop, SubType } from '@quicker-js/class-transformer';
+import {
+  Typed,
+  TypedArray,
+  TypedMap,
+  TypeMirror,
+} from '@quicker-js/class-transformer';
 import path from 'path';
 import { MomentReplacer } from './moment-replacer';
 import { PathReplacer } from './path-replacer';
@@ -33,71 +38,74 @@ export class Config {
   /**
    * 命名空间
    */
-  @Prop({
-    type: String,
-  })
+  @TypedMap(String)
   public readonly namespaces: Map<string, string> = new Map();
 
   /**
    * api输出目录
    */
-  @Prop.default
+  @Typed(String)
   public readonly output: string = path.resolve('src', 'apis');
 
   /**
    * 文件名称的命名方式 有camelCase命名方式和kebabCase命名方法
    * 默认kebabCase
    */
-  @Prop.default
+  @Typed(String)
   public readonly caseType: 'camelCase' | 'kebabCase' = 'kebabCase';
 
   /**
    * 最大文件数量
    */
-  @Prop.default
+  @Typed(Number)
   public readonly fileMax = 10000;
 
   /**
    * 是否允许生成泛型约束
    */
-  @Prop.default
+  @Typed(Boolean)
   public readonly allowTypeParameterDeclarations = false;
 
   /**
    * 需要安装moment库
    * 是否允许用moment替换Date类型
    */
-  @Prop.default
+  @Typed(MomentReplacer)
   public readonly moment: MomentReplacer = new MomentReplacer();
 
   /**
    * 全局文件
    */
-  @Prop({
-    type: RegExp,
-  })
+  @TypedArray(RegExp)
   public readonly globalFiles: RegExp[] = [];
 
   /**
    * 替换规则
    */
-  @Prop({
-    subTypes: SubType.fromTypes(NameReplacer, PathReplacer),
-  })
+  @TypedArray(
+    TypeMirror.createWhereMirror(
+      {
+        subType: NameReplacer,
+        wheres: [{ type: 'name' }],
+      },
+      {
+        subType: PathReplacer,
+        wheres: [{ type: 'path' }],
+      }
+    )
+  )
   public readonly replaces: NameReplacer[] | PathReplacer[] = [];
 
   /**
    * 过滤文件
    */
-  @Prop({
-    type: RegExp,
-  })
+  @TypedArray(RegExp)
   public readonly excludes: RegExp[] = [];
 
   /**
    * 生成的文档版本
    * 版本号
    */
-  @Prop.default
+  @Typed(String)
   public readonly version?: string = '0.0.1';
 }

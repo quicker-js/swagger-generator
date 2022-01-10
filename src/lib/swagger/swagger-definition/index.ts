@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed, TypedMap } from '@quicker-js/class-transformer';
 import { SwaggerDefinitionProperty } from '../swagger-definition-property';
 
 /**
@@ -30,23 +30,21 @@ export class SwaggerDefinition {
   /**
    * model的类型
    */
-  @Prop.default
+  @Typed()
   public type: string;
 
-  @Prop({
-    type: SwaggerDefinitionProperty,
-  })
+  @TypedMap(SwaggerDefinitionProperty)
   public properties: Map<string, SwaggerDefinitionProperty> = new Map();
 
   /**
    * model的标题
    */
-  @Prop.default
+  @Typed()
   public title: string;
 
   /**
    * model的描述
    */
-  @Prop.default
+  @Typed()
   public description: string;
 }

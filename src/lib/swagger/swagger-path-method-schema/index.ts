@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
 /**
  * @class SwaggerPathMethodSchema
@@ -29,12 +29,12 @@ export class SwaggerPathMethodSchema {
   /**
    * 类型
    */
-  @Prop.default
+  @Typed()
   public type: string;
 
   /**
    * 格式
    */
-  @Prop.default
+  @Typed()
   public format: string;
 }

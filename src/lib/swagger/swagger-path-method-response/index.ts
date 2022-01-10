@@ -20,25 +20,25 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 import { SwaggerPathMethodResponseInfo } from '../swagger-path-method-response-info';
 
 /**
  * @class SwaggerPathMethodResponse
  */
 export class SwaggerPathMethodResponse {
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfo)
   public 200: SwaggerPathMethodResponseInfo;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfo)
   public 201: SwaggerPathMethodResponseInfo;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfo)
   public 401: SwaggerPathMethodResponseInfo;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfo)
   public 403: SwaggerPathMethodResponseInfo;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfo)
   public 404: SwaggerPathMethodResponseInfo;
 }

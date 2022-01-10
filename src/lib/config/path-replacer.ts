@@ -20,28 +20,21 @@
  * SOFTWARE.
  */
 
-import { Entity, Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
-@Entity({
-  subTypes: [
-    {
-      type: 'path',
-    },
-  ],
-})
 /**
  * 名称替换器
  */
 export class PathReplacer {
-  @Prop.default
+  @Typed(RegExp)
   public test: RegExp;
 
   /**
    * 用来替换的value
    */
-  @Prop.default
+  @Typed(String)
   public value?: string;
 
-  @Prop.default
+  @Typed(String)
   public type = 'path';
 }

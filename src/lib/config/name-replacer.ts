@@ -20,28 +20,21 @@
  * SOFTWARE.
  */
 
-import { Entity, Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
-@Entity({
-  subTypes: [
-    {
-      type: 'name',
-    },
-  ],
-})
 /**
  * 名称替换器
  */
 export class NameReplacer {
-  @Prop.default
+  @Typed(RegExp)
   public test: RegExp;
 
   /**
    * 用来替换的value
    */
-  @Prop.default
+  @Typed()
   public value?: string;
 
-  @Prop.default
+  @Typed()
   public type: string;
 }

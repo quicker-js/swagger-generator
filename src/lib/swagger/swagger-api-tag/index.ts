@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 
 /**
  * @class SwaggerApiTag
@@ -29,12 +29,12 @@ export class SwaggerApiTag {
   /**
    * 名称
    */
-  @Prop.default
+  @Typed()
   public name: string;
 
   /**
    * 描述
    */
-  @Prop.default
+  @Typed()
   public description: string;
 }

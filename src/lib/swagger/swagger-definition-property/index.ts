@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed, TypedArray } from '@quicker-js/class-transformer';
 import { SwaggerPathMethodResponseInfoSchema } from '../swagger-path-method-response-info-schema';
 
 /**
@@ -30,26 +30,26 @@ export class SwaggerDefinitionProperty {
   /**
    * prop的类型
    */
-  @Prop.default
+  @Typed()
   public type: string;
 
   /**
    * prop的类格式
    */
-  @Prop.default
+  @Typed()
   public format: string;
 
   /**
    * 类型 ref
    * Support only 3.0
    */
-  @Prop.default
+  @Typed()
   public $ref?: string;
 
   /**
    * Support only <= 2.0
    */
-  @Prop.default
+  @Typed(SwaggerPathMethodResponseInfoSchema)
   public items?: SwaggerPathMethodResponseInfoSchema;
 
   /**
@@ -88,14 +88,12 @@ export class SwaggerDefinitionProperty {
   /**
    * 描述
    */
-  @Prop.default
+  @Typed()
   public description: string;
 
   /**
    * 枚举值
    */
-  @Prop({
-    type: String,
-  })
+  @TypedArray(String)
   public enum: string[];
 }

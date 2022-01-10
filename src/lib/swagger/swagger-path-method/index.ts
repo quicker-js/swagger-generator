@@ -20,7 +20,10 @@
  * SOFTWARE.
  */
 
-import classTransformer, { Prop } from '@quicker-js/class-transformer';
+import classTransformer, {
+  Typed,
+  TypedArray,
+} from '@quicker-js/class-transformer';
 import { SwaggerPathMethodParameter } from '../swagger-path-method-parameter';
 import { SwaggerPathMethodSchema } from '../swagger-path-method-schema';
 import { SwaggerPathMethodResponse } from '../swagger-path-method-response';
@@ -30,47 +33,41 @@ import { ParserUtil } from '../../utils';
  * @class SwaggerPathMethod
  */
 export class SwaggerPathMethod {
-  @Prop({
-    type: String,
-  })
+  @TypedArray(String)
   public tags: string[];
 
-  @Prop.default
+  @Typed()
   public summary: string;
 
   /**
    * 描述
    * Support only <= 2.0
    */
-  @Prop.default
+  @Typed()
   public description: string;
 
-  @Prop.default
+  @Typed()
   public operationId: string;
 
   /**
    * Support only <= 2.0
    */
-  @Prop({
-    type: String,
-  })
+  @TypedArray(String)
   public produces: string[];
 
-  @Prop({
-    type: SwaggerPathMethodParameter,
-  })
+  @TypedArray(SwaggerPathMethodParameter)
   public parameters: SwaggerPathMethodParameter[] = [];
 
-  @Prop.default
+  @Typed()
   public deprecated: boolean;
 
-  @Prop.default
+  @Typed()
   public style: string;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodSchema)
   public schema: SwaggerPathMethodSchema;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodResponse)
   public responses: SwaggerPathMethodResponse;
 
   /**

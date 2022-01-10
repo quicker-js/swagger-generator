@@ -20,32 +20,32 @@
  * SOFTWARE.
  */
 
-import { Prop } from '@quicker-js/class-transformer';
+import { Typed } from '@quicker-js/class-transformer';
 import { SwaggerPathMethodSchema } from '../swagger-path-method-schema';
 
 /**
  * @class SwaggerPathMethodParameter
  */
 export class SwaggerPathMethodParameter {
-  @Prop.default
+  @Typed()
   public name: string;
 
-  @Prop.default
+  @Typed()
   public in: string;
 
-  @Prop.default
+  @Typed()
   public description: string;
 
-  @Prop.default
+  @Typed()
   public required: boolean;
 
-  @Prop.default
+  @Typed()
   public type?: string;
 
-  @Prop.default
+  @Typed()
   private format: string;
 
-  @Prop.default
+  @Typed(SwaggerPathMethodSchema)
   private schema?: SwaggerPathMethodSchema;
 
   /**
