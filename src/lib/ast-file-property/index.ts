@@ -259,7 +259,11 @@ export class AstFileProperty implements AstFilePropertyImpl {
           const map = scenesMap.get('Typed') || new Map();
           const list = map.get(name) || [];
           map.set(name, list);
-          scenesMap.set('Typed', map);
+          if (o.type === 'array') {
+            scenesMap.set('TypedArray', map);
+          } else {
+            scenesMap.set('Typed', map);
+          }
         }
       } else {
         const { dateTime, date, enable } = this.astFile.handler.config.moment;
@@ -390,7 +394,27 @@ export class AstFileProperty implements AstFilePropertyImpl {
               undefined,
               scenes.length
                 ? [
-                    factory.createIdentifier(typeName),
+                    typeName === this.astFile.fileName
+                      ? factory.createCallExpression(
+                          factory.createPropertyAccessExpression(
+                            factory.createIdentifier('TypedMirror'),
+                            factory.createIdentifier('from')
+                          ),
+                          undefined,
+                          [
+                            factory.createArrowFunction(
+                              undefined,
+                              undefined,
+                              [],
+                              undefined,
+                              factory.createToken(
+                                SyntaxKind.EqualsGreaterThanToken
+                              ),
+                              factory.createIdentifier(typeName)
+                            ),
+                          ]
+                        )
+                      : factory.createIdentifier(typeName),
                     factory.createObjectLiteralExpression(
                       [
                         factory.createPropertyAssignment(
