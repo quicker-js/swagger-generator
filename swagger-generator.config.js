@@ -21,21 +21,21 @@ module.exports = {
   // output: path.resolve('apis'),
   // globalFiles: ['ResponseResult', 'PageData', 'PageList'],
   // replaces: [
-  //   {
-  //     test: /-v100001/,
-  //     value: '',
-  //     type: 'path',
-  //   },
-  //   {
-  //     test: /^ResponseResult/,
-  //     value: 'R',
-  //     type: 'name',
-  //   },
-  //   {
-  //     test: /^PageList/,
-  //     value: 'P',
-  //     type: 'name',
-  //   }
+  //   // {
+  //   //   test: /-v100001/,
+  //   //   value: '',
+  //   //   type: 'path',
+  //   // },
+  //   // {
+  //   //   test: /^ResponseResult/,
+  //   //   value: 'R',
+  //   //   type: 'name',
+  //   // },
+  //   // {
+  //   //   test: /^PageList/,
+  //   //   value: 'P',
+  //   //   type: 'name',
+  //   // }
   // ],
   // excludes: [],
 };

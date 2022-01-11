@@ -90,10 +90,10 @@
   resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-decorator/-/class-decorator-1.1.0.tgz#55ca97eb5860dc9533db676d748751efbee309ef"
   integrity sha512-g7+lzRtg6R1l2bvOyzcBIimcgOd/k51hz06S2T/2o3lvUKIgPixKjFV6dwbBNCdCcR7QDuTgLCEkG54k6FnNMA==
 
-"@quicker-js/class-transformer@^2.0.0":
-  version "2.0.0"
-  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-transformer/-/class-transformer-2.0.0.tgz#3ba218b10b4e2cd3d29fa8561c579f4af4b94d5b"
-  integrity sha512-wVnb1YQQ63/SonEBgypsDPYT8tXCzxsh74inO1M8G4UyiTJKvJy6ZzjKuvvbDZxwWzbjjv1tUI3kde9fPg0DQA==
+"@quicker-js/class-transformer@^2.0.1":
+  version "2.0.1"
+  resolved "http://registry.npm.mingqi-tech.cn:4873/@quicker-js%2fclass-transformer/-/class-transformer-2.0.1.tgz#65730980c39fe901169d910553def124b520f744"
+  integrity sha512-P4VhxAV9xnKx36n4hSeedPOVley+wXjvjNNAkZlJ+FmUxXQBuIgfalUEG1PskTkHP/wu1YVaUBJcXFLtePTBEQ==
   dependencies:
     "@quicker-js/class-decorator" "^1.1.0"
 

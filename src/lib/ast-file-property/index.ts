@@ -387,6 +387,11 @@ export class AstFileProperty implements AstFilePropertyImpl {
       });
 
       value.forEach((scenes, typeName, k) => {
+        if (typeName === this.astFile.fileName) {
+          this.astFile.imports.set('@quicker-js/class-transformer', {
+            members: new Set(['TypeMirror']),
+          });
+        }
         propDecorators.push(
           factory.createDecorator(
             factory.createCallExpression(
@@ -397,7 +402,7 @@ export class AstFileProperty implements AstFilePropertyImpl {
                     typeName === this.astFile.fileName
                       ? factory.createCallExpression(
                           factory.createPropertyAccessExpression(
-                            factory.createIdentifier('TypedMirror'),
+                            factory.createIdentifier('TypeMirror'),
                             factory.createIdentifier('from')
                           ),
                           undefined,
@@ -447,7 +452,29 @@ export class AstFileProperty implements AstFilePropertyImpl {
                       true
                     ),
                   ]
-                : [factory.createIdentifier(typeName)]
+                : [
+                    typeName === this.astFile.fileName
+                      ? factory.createCallExpression(
+                          factory.createPropertyAccessExpression(
+                            factory.createIdentifier('TypeMirror'),
+                            factory.createIdentifier('from')
+                          ),
+                          undefined,
+                          [
+                            factory.createArrowFunction(
+                              undefined,
+                              undefined,
+                              [],
+                              undefined,
+                              factory.createToken(
+                                SyntaxKind.EqualsGreaterThanToken
+                              ),
+                              factory.createIdentifier(typeName)
+                            ),
+                          ]
+                        )
+                      : factory.createIdentifier(typeName),
+                  ]
             )
           )
         );
