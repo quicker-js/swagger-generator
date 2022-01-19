@@ -60,10 +60,11 @@ export class ModelSourceFile extends SourceFile implements ModelSourceFileImpl {
    */
   public get absolute(): string {
     const { isGlobal, source, filePath } = this;
+    const { handler } = source.sourceManager;
     return path.join(
       isGlobal ? source.rootPath : source.path,
       'vos',
-      filePath + '.ts'
+      handler.fileNameParser(filePath) + '.ts'
     );
   }
 

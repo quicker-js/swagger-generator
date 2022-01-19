@@ -60,18 +60,19 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
    */
   public get absolute(): string {
     const { isGlobal, source, method, filePath } = this;
+    const { handler } = source.sourceManager;
     if (method) {
       return path.join(
         isGlobal ? source.rootPath : source.path,
         'dtos',
         method,
-        filePath + '.ts'
+        handler.fileNameParser(filePath) + '.ts'
       );
     }
     return path.join(
       isGlobal ? source.rootPath : source.path,
       'dtos',
-      filePath + '.ts'
+      handler.fileNameParser(filePath) + '.ts'
     );
   }
 
