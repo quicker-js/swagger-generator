@@ -60,19 +60,18 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
    */
   public get absolute(): string {
     const { isGlobal, source, method, filePath } = this;
-    const { handler } = source.sourceManager;
     if (method) {
       return path.join(
         isGlobal ? source.rootPath : source.path,
         'dtos',
         method,
-        handler.fileNameParser(filePath) + '.ts'
+        filePath + '.ts'
       );
     }
     return path.join(
       isGlobal ? source.rootPath : source.path,
       'dtos',
-      handler.fileNameParser(filePath) + '.ts'
+      filePath + '.ts'
     );
   }
 
@@ -152,7 +151,9 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
       }
     });
 
-    const fileName = ParseHandler.nameParser(name, 'camelCase');
+    const { caseType } = handler.config;
+
+    const fileName = ParseHandler.nameParser(name, caseType || 'camelCase');
 
     const filePath = handler.fileNameParser(name);
 

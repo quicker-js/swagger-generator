@@ -60,11 +60,10 @@ export class ModelSourceFile extends SourceFile implements ModelSourceFileImpl {
    */
   public get absolute(): string {
     const { isGlobal, source, filePath } = this;
-    const { handler } = source.sourceManager;
     return path.join(
       isGlobal ? source.rootPath : source.path,
       'vos',
-      handler.fileNameParser(filePath) + '.ts'
+      filePath + '.ts'
     );
   }
 
@@ -144,7 +143,12 @@ export class ModelSourceFile extends SourceFile implements ModelSourceFileImpl {
       generics.add(genericParameter);
     }
 
-    let fileName = ParseHandler.nameParser(name.split('«')[0], 'camelCase');
+    const { caseType } = handler.config;
+
+    let fileName = ParseHandler.nameParser(
+      name.split('«')[0],
+      caseType || 'camelCase'
+    );
 
     const isGlobal = !!globalFiles.find((o) => o.test(fileName));
 
