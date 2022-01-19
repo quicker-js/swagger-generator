@@ -143,12 +143,7 @@ export class ModelSourceFile extends SourceFile implements ModelSourceFileImpl {
       generics.add(genericParameter);
     }
 
-    const { caseType } = handler.config;
-
-    let fileName = ParseHandler.nameParser(
-      name.split('«')[0],
-      caseType || 'camelCase'
-    );
+    let fileName = ParseHandler.nameParser(name.split('«')[0], 'camelCase');
 
     const isGlobal = !!globalFiles.find((o) => o.test(fileName));
 
@@ -163,7 +158,7 @@ export class ModelSourceFile extends SourceFile implements ModelSourceFileImpl {
       source,
       originGenerics: generics,
       fileName,
-      filePath: handler.fileNameParser(fileName.split('«')[0]),
+      filePath: handler.fileNameParser(name.split('«')[0]),
       isGlobal,
       definition,
     });

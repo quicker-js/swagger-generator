@@ -151,9 +151,7 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
       }
     });
 
-    const { caseType } = handler.config;
-
-    const fileName = ParseHandler.nameParser(name, caseType || 'camelCase');
+    const fileName = ParseHandler.nameParser(name, 'camelCase');
 
     const filePath = handler.fileNameParser(name);
 
