@@ -39,6 +39,9 @@ export class SwaggerPathMethod {
   @Typed()
   public summary: string;
 
+  @TypedArray(String)
+  public consumes?: string[];
+
   /**
    * 描述
    * Support only <= 2.0

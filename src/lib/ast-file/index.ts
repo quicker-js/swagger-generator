@@ -218,7 +218,7 @@ export class AstFile implements AstFileImpl {
     const decorators: Decorator[] = [];
     this.sourceFiles.forEach((o) => {
       if (o instanceof PathSourceFile) {
-        const { method, url, pathMethod } = o;
+        const { method, url, pathMethod, contentType } = o;
         const description = o.getDescription();
         if (url && method && pathMethod) {
           const respon = pathMethod.responses['200'];
@@ -232,6 +232,15 @@ export class AstFile implements AstFileImpl {
               factory.createStringLiteral(method)
             ),
           ];
+
+          if (contentType) {
+            list.push(
+              factory.createPropertyAssignment(
+                factory.createIdentifier('contentType'),
+                factory.createStringLiteral(contentType)
+              )
+            );
+          }
 
           if (description) {
             list.push(

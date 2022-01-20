@@ -56,6 +56,19 @@ export class PathSourceFile extends SourceFile implements PathSourceFileImpl {
   }
 
   /**
+   * 请求体类型
+   */
+  public get contentType(): string | undefined {
+    const { pathMethod } = this;
+    if (pathMethod) {
+      const { consumes } = pathMethod;
+      if (Array.isArray(consumes) && consumes.length) {
+        return consumes[0];
+      }
+    }
+  }
+
+  /**
    * 资源绝对路径
    */
   public get absolute(): string {
